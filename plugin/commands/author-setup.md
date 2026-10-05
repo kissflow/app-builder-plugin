@@ -1,5 +1,5 @@
 ---
-description: One-time setup — check the prerequisites, fetch the build engine for this machine, connect this folder to your Kissflow account (with an access key, or by signing in), and seed the agent memory.
+description: One-time setup — check the prerequisites, fetch the build engine for this machine, connect this folder to your Kissflow account with your access key, and seed the agent memory.
 argument-hint: "[your Kissflow account address, e.g. acme.kissflow.com] (run once in the folder you build from)"
 ---
 
@@ -49,14 +49,12 @@ checksum failure says so — just re-run the command.
 
 ## 3. Connect to your Kissflow account
 Ask the user for their **Kissflow account address** if `$ARGUMENTS` doesn't already hold one (the
-address they open Kissflow at, e.g. `acme.kissflow.com`). There are two ways to connect; use the
-first unless the user asks for the other.
-
-**A. Access key — the default.** Tell the user in one line where to create one: *"In Kissflow, click
-your profile picture › My settings › API authentication › Access keys, and create a key. You'll paste
-it into a page that opens next."* Then:
+address they open Kissflow at, e.g. `acme.kissflow.com`). The folder connects with the user's own
+**Kissflow access key**. Tell them in one line where to create one: *"In Kissflow, click your profile
+picture › My settings › API authentication › Access keys, and create a key. You'll paste it into a page
+that opens next."* Then:
 ```bash
-node "${CLAUDE_PLUGIN_ROOT}/bin/kf.mjs" connect <account-address> --access-key
+node "${CLAUDE_PLUGIN_ROOT}/bin/kf.mjs" connect <account-address>
 source .kf-env
 ```
 A local page opens in the browser. The user pastes the **access key ID** and **access key secret**
@@ -68,17 +66,9 @@ the browser didn't open; it waits up to 15 minutes.
 - If the page says Kissflow **didn't accept the key**, the user fixes it there (re-copy both parts,
   or create a new key). If API access is off for the account, an admin must turn it on.
 - A key that belongs to a **service account** is refused: it must be the user's own key.
+- Access keys are the only way to connect. Don't offer any other sign-in method.
 
-**B. Sign in with Kissflow (MCP).** Only when the user asks to sign in instead of using a key:
-```bash
-node "${CLAUDE_PLUGIN_ROOT}/bin/kf.mjs" connect <account-address>
-source .kf-env
-```
-The browser opens the account's own Kissflow sign-in (SSO included); the user signs in and approves
-access, and connect finishes on its own. If it says the account **does not offer assistant sign-in**,
-an admin must enable MCP access for the account — offer the access key (A) instead.
-
-Either way, everything the agents build is done **as this person**, with exactly their Kissflow
+Everything the agents build is done **as this person**, with exactly their Kissflow
 permissions. The credential stays in the user's home folder, never in this workspace. `.kf-env` holds
 only which account and method this folder uses (`KISSFLOW_DOMAIN`, `KISSFLOW_ACCOUNT_ID`, `KF_AUTH`),
 who connected (`KF_USER_EMAIL`, `KF_USER_NAME`) and the account name (`KF_PROJECT_NAME`) — nothing

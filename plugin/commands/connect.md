@@ -1,24 +1,21 @@
 ---
-description: Connect this folder to a Kissflow account — with your own access key, or by signing in in the browser.
-argument-hint: "[your Kissflow account address, e.g. acme.kissflow.com] [--sign-in]"
+description: Connect this folder to a Kissflow account with your own access key.
+argument-hint: "[your Kissflow account address, e.g. acme.kissflow.com]"
 ---
 
 Connect this folder to the user's Kissflow account, or switch it to another one.
 
 1. Take the account address from `$ARGUMENTS`; if it's empty, ask for it (the address they open
    Kissflow at, e.g. `acme.kissflow.com`). **Never ask for a key ID or secret in this chat.**
-2. By default connect with an access key. Tell the user where to create one (*profile picture › My
+2. Connect with the user's own access key. Tell them where to create one (*profile picture › My
    settings › API authentication › Access keys*), then run:
    ```bash
-   node "${CLAUDE_PLUGIN_ROOT}/bin/kf.mjs" connect <account-address> --access-key
+   node "${CLAUDE_PLUGIN_ROOT}/bin/kf.mjs" connect <account-address>
    source .kf-env
    ```
    A local page opens; the user pastes the key ID and secret there and connect finishes by itself.
-   If the user asked to sign in instead (`--sign-in` in `$ARGUMENTS`), run the same command without
-   `--access-key`: the account's own Kissflow sign-in opens and the user approves access.
-   Show the printed link in case the browser didn't open.
-3. If the key is refused, the user fixes it on the page (re-copy both parts, or create a new key). If
-   sign-in says the account does not offer assistant sign-in, offer the access key instead.
+   Show the printed link in case the browser didn't open. Access keys are the only way to connect.
+3. If the key is refused, the user fixes it on the page (re-copy both parts, or create a new key).
 4. Confirm with `node "${CLAUDE_PLUGIN_ROOT}/bin/kf.mjs" connect --status`, greet with the account name
    (`$KF_PROJECT_NAME`), and offer to build: `/build-app "<requirement>"`.
 
