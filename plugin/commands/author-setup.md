@@ -1,5 +1,5 @@
 ---
-description: One-time setup — check the prerequisites, fetch the build engine for this machine, sign in to your Kissflow account in the browser and connect this folder to it, and seed the agent memory.
+description: One-time setup — check the prerequisites, fetch the build engine for this machine, connect this folder to your Kissflow account (with an access key, or by signing in), and seed the agent memory.
 argument-hint: "[your Kissflow account address, e.g. acme.kissflow.com] (run once in the folder you build from)"
 ---
 
@@ -47,27 +47,44 @@ node "${CLAUDE_PLUGIN_ROOT}/bin/kf.mjs" --version
 It prints the engine version once the download (if any) finishes. On a re-run it's instant. A
 checksum failure says so — just re-run the command.
 
-## 3. Sign in to your Kissflow account — THE standard flow
+## 3. Connect to your Kissflow account
 Ask the user for their **Kissflow account address** if `$ARGUMENTS` doesn't already hold one (the
-address they open Kissflow at, e.g. `acme.kissflow.com`). Then:
+address they open Kissflow at, e.g. `acme.kissflow.com`). There are two ways to connect; use the
+first unless the user asks for the other.
+
+**A. Access key — the default.** Tell the user in one line where to create one: *"In Kissflow, click
+your profile picture › My settings › API authentication › Access keys, and create a key. You'll paste
+it into a page that opens next."* Then:
+```bash
+node "${CLAUDE_PLUGIN_ROOT}/bin/kf.mjs" connect <account-address> --access-key
+source .kf-env
+```
+A local page opens in the browser. The user pastes the **access key ID** and **access key secret**
+there; connect checks the key with Kissflow and finishes on its own. Surface the printed link in case
+the browser didn't open; it waits up to 15 minutes.
+- **Never ask the user to paste a key ID or secret into this chat**, and never put one in a command,
+  a file or an environment variable. If they paste one here anyway, don't repeat it: tell them to
+  delete that key in Kissflow, create a new one, and paste it into the page.
+- If the page says Kissflow **didn't accept the key**, the user fixes it there (re-copy both parts,
+  or create a new key). If API access is off for the account, an admin must turn it on.
+- A key that belongs to a **service account** is refused: it must be the user's own key.
+
+**B. Sign in with Kissflow (MCP).** Only when the user asks to sign in instead of using a key:
 ```bash
 node "${CLAUDE_PLUGIN_ROOT}/bin/kf.mjs" connect <account-address>
 source .kf-env
 ```
-What happens: the browser opens the account's **own Kissflow sign-in** (SSO included). The user signs
-in and approves access for Kissflow App Builder on the consent screen, the tab says "Signed in", and
-connect finishes on its own. Surface the printed link prominently in case the browser didn't open;
-connect waits up to 10 minutes. There are **no keys to prepare and nothing to paste**.
+The browser opens the account's own Kissflow sign-in (SSO included); the user signs in and approves
+access, and connect finishes on its own. If it says the account **does not offer assistant sign-in**,
+an admin must enable MCP access for the account — offer the access key (A) instead.
 
-- If connect says the account **does not offer assistant sign-in**, an account admin must enable MCP
-  access for the account (Admin → MCP access). Say that in one line and stop.
-- `connect --status` shows which account and person this folder is connected as; `connect --sign-out`
-  forgets the sign-in on this machine. Re-running connect with another address switches accounts.
-
-The sign-in stays in the user's home folder and renews itself. `.kf-env` holds only which account
-this folder builds in (`KISSFLOW_DOMAIN`, `KISSFLOW_ACCOUNT_ID`), who connected (`KF_USER_EMAIL`,
-`KF_USER_NAME`) and the account name (`KF_PROJECT_NAME`) — nothing secret, but still never commit it.
-Everything the agents build is done **as this person**, with exactly their Kissflow permissions.
+Either way, everything the agents build is done **as this person**, with exactly their Kissflow
+permissions. The credential stays in the user's home folder, never in this workspace. `.kf-env` holds
+only which account and method this folder uses (`KISSFLOW_DOMAIN`, `KISSFLOW_ACCOUNT_ID`, `KF_AUTH`),
+who connected (`KF_USER_EMAIL`, `KF_USER_NAME`) and the account name (`KF_PROJECT_NAME`) — nothing
+secret, but still never commit it. `connect --status` shows the account, person and method;
+`connect --sign-out` forgets the credential on this machine. Re-running connect with another address
+switches accounts.
 
 **THE ACCOUNT NAME IS THE WORKING CONTEXT.** `.kf-env` carries `KF_PROJECT_NAME` (the Kissflow
 account's name). Greet with it ("Connected to **Acme** — what should the app do?"), interpret every
@@ -79,7 +96,7 @@ saved versions under `runs/<app>/published/`, and the agents' memory in `MEMORY.
 Agents write new lessons with `node "${CLAUDE_PLUGIN_ROOT}/bin/kf.mjs" memory remember "<lesson>" --app <appId>`.
 
 ## 3b. Choose the app to build in
-Right after signing in, open the app picker:
+Right after connecting, open the app picker:
 ```bash
 node "${CLAUDE_PLUGIN_ROOT}/bin/kf.mjs" connect --app
 source .kf-env
@@ -98,15 +115,7 @@ then re-run `connect --app`.
 ```
 `MEMORY.md` is the agents' auto-evolving memory — yours to grow; an existing one is never replaced.
 
-## 5. Access keys — FALLBACK only (accounts without assistant sign-in)
-Only when the account cannot enable MCP access and the user has a Kissflow access key. Export, don't
-hardcode, and don't run connect:
-```bash
-export KISSFLOW_SUBDOMAIN=<your-subdomain>      # e.g. dev-mycompany
-export KISSFLOW_ACCOUNT_ID=<your-account-id>
-export KISSFLOW_API_KEY=<access-key-id>
-export KISSFLOW_API_SECRET=<access-key-secret>
-```
+## 5. Safety
 Always **dry-run** first and target a **dev** account; the pipeline never auto-publishes to prod.
 
 ## 6. Go

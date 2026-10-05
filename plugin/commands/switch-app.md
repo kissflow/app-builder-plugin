@@ -5,7 +5,7 @@ argument-hint: ""
 
 Switch the app this folder builds in.
 
-1. The folder must already be signed in (`.kf-env` exists). If it isn't, run `/author-setup` instead and stop.
+1. The folder must already be connected (`.kf-env` exists). If it isn't, run `/author-setup` instead and stop.
 2. Run:
    ```bash
    node "${CLAUDE_PLUGIN_ROOT}/bin/kf.mjs" connect --app

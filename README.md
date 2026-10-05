@@ -18,7 +18,9 @@ Then, once per project folder:
 ```
 
 The first run downloads the build engine for your platform (about 100 MB, once per version) and
-opens a browser sign-in to connect the folder to your Kissflow App Builder project.
+connects the folder to your Kissflow account: paste an access key you create in Kissflow (profile
+picture › My settings › API authentication › Access keys) into a page that opens in your browser, or
+sign in with Kissflow instead.
 
 ## Requirements
 
