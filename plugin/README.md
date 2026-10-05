@@ -10,7 +10,7 @@ they read, and a small launcher for the build engine.
 Once per project folder:
 
 ```
-/author-setup
+/connect
 ```
 
 The first run downloads the build engine for your platform (about 100 MB, once per version) and

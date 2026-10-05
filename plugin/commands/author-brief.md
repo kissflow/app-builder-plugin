@@ -6,7 +6,7 @@ argument-hint: "[BRD file path (.md/.txt/.pdf/.docx) | pasted requirement text |
 **Stage 1 of the staged authoring pipeline: ingest.** Each requirement becomes its own **run**
 (isolated, versioned) under `runs/`.
 
-Pre-req: `/author-setup` has connected this folder (`source .kf-env`).
+Pre-req: `/connect` has connected this folder (`source .kf-env`).
 
 ## Accept any input shape
 `$ARGUMENTS` may be **(a)** a path to a BRD file, **(b)** pasted requirement text (a paragraph or a

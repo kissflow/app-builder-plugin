@@ -7,7 +7,7 @@ Spawn **kf-seed** to fill the built schema with real/representative data. A corr
 until its lists/datasets are populated and reference fields have targets.
 
 Pre-req: the schema exists (via `/author-app` or `/author-generate`); the spec at
-`runs/current/app-spec.json`; the folder is connected (`/author-setup`).
+`runs/current/app-spec.json`; the folder is connected (`/connect`).
 
 1. **Identify targets** from `data_model`: the lists/datasets (masters/option sets) and any forms
    needing starting records; plus whatever **kf-acceptance** scenarios require.

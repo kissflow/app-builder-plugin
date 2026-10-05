@@ -10,12 +10,12 @@ app deployed as the app's `Application` component). The user picks the UI mode.
 
 Pre-req: the folder is connected to a Kissflow account (`.kf-env` exists → `source .kf-env`, which
 exports `KISSFLOW_DOMAIN` and `KISSFLOW_ACCOUNT_ID`; the build acts as the signed-in person).
-If it's missing, tell the user to run `/author-setup` and stop.
+If it's missing, tell the user to run `/connect` and stop.
 
 ## Step 0 — Set up the workspace + pick the UI mode (FIRST, before any build work)
 
 **a. Establish the project directory — NEVER build in a temp/scratch CWD.** Runs live under `runs/`
-in the current directory. If the user named a folder, use it (`cd` there first; `/author-setup` must
+in the current directory. If the user named a folder, use it (`cd` there first; `/connect` must
 have connected it). Otherwise use the current directory, or ask. **Everything below runs inside that
 folder** (author spec, generate, deploy) so the app lands in the user's folder, not a temp dir. Do
 NOT `cd` to `/tmp` when a folder rejects an op — if a _delete-heavy_ build step is blocked, spill only

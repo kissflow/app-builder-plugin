@@ -21,7 +21,7 @@ you just don't stop between them). Only a **blocking ambiguity** (a genuinely mi
 changes the build) is grounds to pause and ask — size and complexity are not. The build is still
 real and (for Processes/Cases) irreversible over REST.
 
-Pre-req: `/author-setup` has connected this folder (`.kf-env` exists; `source .kf-env`).
+Pre-req: `/connect` has connected this folder (`.kf-env` exists; `source .kf-env`).
 
 ## USER PROGRESS — narrate the build as it happens
 The build takes minutes and the user is watching. Your text between tool calls is what they see, so
