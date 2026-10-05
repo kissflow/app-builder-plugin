@@ -21,6 +21,14 @@ The first run downloads the build engine for your platform (about 100 MB, once p
 connects the folder to your Kissflow account: paste an access key you create in Kissflow (profile
 picture › My settings › API authentication › Access keys) into a page that opens in your browser.
 
+## Usage data
+
+The plugin sends no telemetry of its own. Each request it makes to your Kissflow account names the
+plugin in its User-Agent, with its version, your platform and random ids for this installation,
+workspace and command, so Kissflow can see how the plugin is used from its own request logs. Nothing
+about your apps, requirements or data is added. Set `KF_TELEMETRY=0` to send only the plugin version
+and platform.
+
 ## Requirements
 
 - Claude Code with Node.js 18 or newer

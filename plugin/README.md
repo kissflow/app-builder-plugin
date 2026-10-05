@@ -19,6 +19,14 @@ Kissflow (profile picture › My settings › API authentication › Access keys
 your browser. The app is built as you, with your Kissflow permissions, and the key stays in your home
 folder.
 
+## Usage data
+
+The plugin sends no telemetry of its own. Each request it makes to your Kissflow account names the
+plugin in its User-Agent, with its version, your platform and random ids for this installation,
+workspace and command, so Kissflow can see how the plugin is used from its own request logs. Nothing
+about your apps, requirements or data is added. Set `KF_TELEMETRY=0` to send only the plugin version
+and platform.
+
 ## Use
 
 ```
