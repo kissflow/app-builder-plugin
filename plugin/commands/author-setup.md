@@ -1,6 +1,6 @@
 ---
 description: One-time setup — check the prerequisites, fetch the build engine for this machine, connect this folder to your Kissflow account with your access key, and seed the agent memory.
-argument-hint: "[your Kissflow account address, e.g. acme.kissflow.com] (run once in the folder you build from)"
+argument-hint: "[your Development sandbox address] (run once in the folder you build from)"
 ---
 
 Run this **once** in the folder you want to build from. The plugin ships its commands, its specialist
@@ -48,9 +48,10 @@ It prints the engine version once the download (if any) finishes. On a re-run it
 checksum failure says so — just re-run the command.
 
 ## 3. Connect to your Kissflow account
-Ask the user for their **Kissflow account address** if `$ARGUMENTS` doesn't already hold one (the
-address they open Kissflow at, e.g. `acme.kissflow.com`). The folder connects with the user's own
-**Kissflow access key**. Tell them in one line where to create one: *"In Kissflow, click your profile
+Ask the user for their **Development sandbox address** if `$ARGUMENTS` doesn't already hold one —
+the address they open their account's Development sandbox at, not the production account. The
+App Builder builds **only in a Development sandbox**; connect refuses a production account or a Test
+sandbox. The folder connects with the user's own **Kissflow access key**, created in that sandbox. Tell them in one line where to create one: *"In Kissflow, click your profile
 picture › My settings › API authentication › Access keys, and create a key. You'll paste it into a page
 that opens next."* Then:
 ```bash
@@ -66,6 +67,8 @@ the browser didn't open; it waits up to 15 minutes.
 - If the page says Kissflow **didn't accept the key**, the user fixes it there (re-copy both parts,
   or create a new key). If API access is off for the account, an admin must turn it on.
 - A key that belongs to a **service account** is refused: it must be the user's own key.
+- If connect says the address is a **production account** or a **Test sandbox**, say so in one line and
+  ask for the Development sandbox's address. Never suggest a way around it.
 - Access keys are the only way to connect. Don't offer any other sign-in method.
 
 Everything the agents build is done **as this person**, with exactly their Kissflow

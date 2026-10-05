@@ -18,7 +18,7 @@ Then, once per project folder:
 ```
 
 The first run downloads the build engine for your platform (about 100 MB, once per version) and
-connects the folder to your Kissflow account: paste an access key you create in Kissflow (profile
+connects the folder to your account's Kissflow Development sandbox, the only place it builds: paste an access key you create in Kissflow (profile
 picture › My settings › API authentication › Access keys) into a page that opens in your browser.
 
 ## Usage data

@@ -14,7 +14,7 @@ Once per project folder:
 ```
 
 The first run downloads the build engine for your platform (about 100 MB, once per version) and
-connects the folder to your Kissflow account: you paste an access key you create in
+connects the folder to your account's Kissflow Development sandbox — the only place it builds: you paste an access key you create in
 Kissflow (profile picture › My settings › API authentication › Access keys) into a page that opens in
 your browser. The app is built as you, with your Kissflow permissions, and the key stays in your home
 folder.
