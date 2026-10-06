@@ -1,7 +1,7 @@
 {
-  "client_id": "https://iamadhee.github.io/kissflow-app-builder/oauth/client.json",
+  "client_id": "https://kissflow.github.io/app-builder-plugin/oauth/client.json",
   "client_name": "Kissflow App Builder",
-  "client_uri": "https://github.com/iamadhee/kissflow-app-builder",
+  "client_uri": "https://github.com/kissflow/app-builder-plugin",
   "redirect_uris": [
     "http://127.0.0.1/callback",
     "http://localhost/callback"

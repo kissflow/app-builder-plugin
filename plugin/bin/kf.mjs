@@ -13,7 +13,7 @@ import { fileURLToPath } from "node:url";
 const PLUGIN_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(PLUGIN_ROOT, ".claude-plugin", "plugin.json"), "utf8"));
 const VERSION = manifest.version;
-const RELEASES = manifest.engine?.releases || "https://github.com/iamadhee/kissflow-app-builder/releases/download";
+const RELEASES = manifest.engine?.releases || "https://github.com/kissflow/app-builder-plugin/releases/download";
 const target = `${process.platform === "win32" ? "win" : process.platform}-${process.arch}`;
 const exe = process.platform === "win32" ? ".exe" : "";
 const file = `kf-${target}${exe}`;

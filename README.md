@@ -7,7 +7,7 @@ custom React UI.
 ## Install
 
 ```
-/plugin marketplace add iamadhee/kissflow-app-builder
+/plugin marketplace add kissflow/app-builder-plugin
 /plugin install app-builder@kissflow
 ```
 
