@@ -2,7 +2,7 @@
   "name": "app-builder",
   "displayName": "Kissflow App Builder",
   "description": "Build a complete Kissflow app from a requirement: data models, roles, workflows, permissions and pages, plus a hosted React UI. Connects to your Kissflow App Builder project.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": {
     "name": "Kissflow"
   },
@@ -15,6 +15,7 @@
     "agents"
   ],
   "engine": {
-    "releases": "https://github.com/kissflow/app-builder-plugin/releases/download"
+    "releases": "https://github.com/kissflow/app-builder-plugin/releases/download",
+    "marketplace": "kissflow"
   }
 }

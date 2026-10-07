@@ -35,7 +35,10 @@ here directly.
    - `--yes` → apply without the extra prompt.
 4. **Apply** — `node "${CLAUDE_PLUGIN_ROOT}/bin/kf.mjs" apply runs/current/app-spec.json --mode <express|comprehensive>`
    (add `--no-pages` for a React Custom UI run; targets the account in your `KISSFLOW_*` env — keep
-   this pointed at **dev**). If re-running a run that was already partly built, the engine's reuse
+   this pointed at **dev**). A new app is created in the production account the sandbox belongs to,
+   then built in the sandbox; if apply says the production key is missing, run
+   `node "${CLAUDE_PLUGIN_ROOT}/bin/kf.mjs" connect --production`, then re-run apply.
+   If re-running a run that was already partly built, the engine's reuse
    mode maps to the existing gen→server ids (from the prior apply log in `generated/`) instead of
    duplicating — don't re-create from scratch. Apply is **resumable**: a re-run continues from its
    checkpoint and re-publishes only changed flows. It auto-handles **account name collisions**

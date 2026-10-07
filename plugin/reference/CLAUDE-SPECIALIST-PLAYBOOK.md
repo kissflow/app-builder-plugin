@@ -141,6 +141,7 @@ Light/Dark/System mode.
 |---|---|---|
 | `kf-ba` | domain evidence, personas, journeys, entities, business rules | every claim is sourced and every entity/rule serves a journey |
 | `kf-comprehension` | semantics of an existing app | claims are derived, observed or stated; unresolved residue is explicit |
+| `kf-comprehension` | semantics of an existing app | claims are derived, observed or stated; unresolved residue is explicit |
 | `kf-architect` | cross-cutting structure, roles, ER map and build order | every journey has a lowerable dependency path |
 | `kf-data-architect` | fields, references, child tables and computed values | references resolve and derived values are expressions, not manual inputs |
 | `kf-workflow-designer` | process/case lifecycles, routing, SLA and notifications | every journey can finish; no dead state or fake parallelism |
@@ -162,6 +163,7 @@ Light/Dark/System mode.
 | `kf-author` | approved live metadata authoring | created metadata is re-read and verified after publish |
 | `kf-builder` | legacy path adapter to `kf-ui-builder` | exactly one source tree is selected and canonical builder checks pass |
 | `kf-runtime-qa` | live runtime smoke and failure localization | observed runtime paths pass without mutating production state |
+| `kf-reconciler` | minimal safe convergence of IR and live state | drift is classified and destructive operations require approval |
 | `kf-reconciler` | minimal safe convergence of IR and live state | drift is classified and destructive operations require approval |
 
 The fleet is the comprehensive/live-authoring pipeline. It must not read, invoke or repair another

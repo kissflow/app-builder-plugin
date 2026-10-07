@@ -42,7 +42,10 @@ resume here at Step 2.)
 
 ## Step 2 — Generate (create it in Kissflow)
 
-Apply the spec to the dev account, per the **UI mode chosen in Step 0**:
+Apply the spec to the dev account, per the **UI mode chosen in Step 0**. A **new** app (none chosen
+with `/switch-app`) is created in the production account the sandbox belongs to, then built in the
+sandbox. If apply says the production key is missing, run
+`node "${CLAUDE_PLUGIN_ROOT}/bin/kf.mjs" connect --production` (a local key page), then re-run apply.
 
 - **Custom UI** → skip native pages:
   `node "${CLAUDE_PLUGIN_ROOT}/bin/kf.mjs" apply runs/current/app-spec.json --mode <express|comprehensive> --no-pages`

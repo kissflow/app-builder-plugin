@@ -18,8 +18,10 @@ Then, once per project folder:
 ```
 
 The first run downloads the build engine for your platform (about 100 MB, once per version) and
-connects the folder to your account's Kissflow Development sandbox, the only place it builds: paste an access key you create in Kissflow (profile
-picture › My settings › API authentication › Access keys) into a page that opens in your browser.
+connects the folder to your Kissflow production account and its Development sandbox — give either
+address — and paste an access key you create in each (profile picture › My settings › API
+authentication › Access keys) into one page that opens in your browser. New apps are created in the production account; everything else is
+built in the sandbox.
 
 ## Usage data
 
@@ -45,7 +47,8 @@ and platform.
 Or step by step: `/author-brief` → `/author-plan` → `/author-review` → `/author-refine` →
 `/author-preview` → `/author-generate`. `/author-status` and `/author-runs` show where a build stands.
 
-Everything targets your development environment. Nothing publishes to production.
+Everything is built in your Development sandbox. The only thing created in production is a new,
+empty app, which Kissflow copies into the sandbox; nothing else is published there.
 
 ## Releases
 
