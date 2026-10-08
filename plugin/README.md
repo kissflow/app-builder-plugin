@@ -1,6 +1,6 @@
 # Kissflow App Builder
 
-A Claude Code plugin that turns an idea or a requirements document into a running Kissflow app:
+A Claude Code and Codex plugin that turns an idea or a requirements document into a running Kissflow app:
 data models, roles, workflows, permissions and pages in your Kissflow account, with an optional
 custom React UI. This folder carries the commands, the specialist agents, the reference documents
 they read, and a small launcher for the build engine.
@@ -39,6 +39,8 @@ Or step by step: `/author-brief` → `/author-plan` → `/author-review` → `/a
 
 `/sync` brings in an app that already exists; `/author-understand` explains it and `/author-reconcile`
 changes it.
+
+In Codex the commands are skills: `$app-builder:connect`, `$app-builder:build-app` and so on.
 
 Everything is built in your Development sandbox. The only thing created in production is a new,
 empty app, which Kissflow copies into the sandbox; nothing else is published there.

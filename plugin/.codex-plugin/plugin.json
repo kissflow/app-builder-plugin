@@ -1,0 +1,21 @@
+{
+  "name": "app-builder",
+  "version": "1.0.2",
+  "description": "Build a complete Kissflow app from a requirement: data models, roles, workflows, permissions and pages, plus a hosted React UI. Connects to your Kissflow App Builder project.",
+  "keywords": [
+    "kissflow",
+    "app-builder",
+    "low-code",
+    "workflow",
+    "agents"
+  ],
+  "skills": "./.codex-plugin/skills/",
+  "commands": [],
+  "hooks": "./.codex-plugin/hooks.json",
+  "interface": {
+    "displayName": "Kissflow App Builder",
+    "shortDescription": "Build Kissflow apps from a requirement",
+    "developerName": "Kissflow",
+    "category": "Productivity"
+  }
+}
