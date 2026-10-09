@@ -15,7 +15,7 @@ Follow `${CLAUDE_PLUGIN_ROOT}/reference/CLAUDE-SPECIALIST-PLAYBOOK.md`; this fil
 substitute a path inferred from the app name.
 
 ## The coverage contract (non-negotiable)
-1. `node "${CLAUDE_PLUGIN_ROOT}/bin/kf.mjs" qa-universe "runs/current/app-spec.json" > "runs/current/qa/universe.json"` — the
+1. `node "${CLAUDE_PLUGIN_ROOT}/bin/kf.mjs" qa-universe "runs/current/app-spec.json" --out "runs/current/qa/universe.json"` — the
    engine enumerates every testable obligation with a stable id (journeys J:, workflow step×outcome
    W:, granted permissions P:, implied denials D:, data scopes S:, automations A:, field rules F:,
    references R:).

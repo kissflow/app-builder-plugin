@@ -7,8 +7,8 @@ argument-hint: "[optional focus — a flow / role / journey | blank = the whole 
 coverage. Requires a generated app (`runs/current/generated/` apply log) and a connected dev env.
 
 ## Do
-1. `mkdir -p runs/current/qa` and enumerate the coverage universe:
-   `node "${CLAUDE_PLUGIN_ROOT}/bin/kf.mjs" qa-universe runs/current/app-spec.json > runs/current/qa/universe.json`
+1. Enumerate the coverage universe (the engine creates `runs/current/qa/`):
+   `node "${CLAUDE_PLUGIN_ROOT}/bin/kf.mjs" qa-universe runs/current/app-spec.json --out runs/current/qa/universe.json`
    Tell the user the item counts by class — this is what "100%" means for this app.
 2. Spawn **kf-runtime-qa**. It reads every artifact, writes `qa/test-plan.json` with each test
    claiming universe ids, and iterates until the coverage gate passes:

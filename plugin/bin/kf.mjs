@@ -36,10 +36,26 @@ async function download() {
   process.stderr.write(`kf: engine ready\n`);
 }
 
+// Codex's sandbox lets a command write only inside the workspace; the engine lives in the home folder.
+// Same advice as the engine gives for the keys folder (engine/auth/store.mjs homeBlockedMessage).
+function blockedMessage(dir, code) {
+  const allow = process.env.KF_HOME || join(homedir(), ".kissflow");
+  return [`kf: can't set up the App Builder engine: writing to ${dir} is not allowed here (${code}).`,
+    "  The engine is kept in your home folder, and this command may only write inside the project (Codex's sandbox",
+    "  does this). Allow it in one of these ways, then run the command again:",
+    "  • approve running this command outside the sandbox when Codex asks;",
+    `  • or let Codex write to ${allow}: create that folder once, outside Codex (in a terminal: mkdir "${allow}"),`,
+    "    then add to ~/.codex/config.toml (the sandbox opens only a folder that already exists)",
+    "      [sandbox_workspace_write]",
+    `      writable_roots = [${JSON.stringify(allow)}]`,
+    "    and restart Codex;",
+    "  • or give Codex full access (/approvals › Full access)."].join("\n") + "\n";
+}
+
 try {
   if (!existsSync(bin)) await download();
 } catch (e) {
-  process.stderr.write(`kf: ${e.message}\n`);
+  process.stderr.write(["EPERM", "EACCES", "EROFS"].includes(e.code) ? blockedMessage(dirname(bin), e.code) : `kf: ${e.message}\n`);
   process.exit(1);
 }
 const r = spawnSync(bin, process.argv.slice(2), {

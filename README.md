@@ -68,6 +68,11 @@ network_access = true
 writable_roots = ["~/.kissflow"]
 ```
 
+On Windows, create the folder once before Codex can be allowed to write there:
+`mkdir "%USERPROFILE%\.kissflow"` (in PowerShell: `mkdir "$env:USERPROFILE\.kissflow"`), then restart Codex.
+Codex runs commands on a hidden desktop, so no browser window opens by itself: when a command prints
+"Open this link in your browser", open that link.
+
 The plugin's confidentiality hooks run once you trust them in `/hooks`.
 
 ## Releases
