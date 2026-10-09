@@ -6,16 +6,19 @@ description: "From a BRD/idea, author a whole Kissflow app (data models + roles 
 This skill is the plugin's `/build-app` command. It takes: "<BRD or idea>" [--ui native|custom] [--dry-run]. Read the instructions below with these substitutions:
 
 - `${CLAUDE_PLUGIN_ROOT}` is the plugin's root folder: `../../..` from the folder this SKILL.md is in, the one
-  holding `bin/kf.mjs`. Your shell does not set it, so write that folder's absolute path wherever it appears,
-  here and in the agent and reference files you read.
+  holding `bin/kf.mjs`. Always write that folder's absolute path in its place, here and in the agent and
+  reference files you read: the literal `${CLAUDE_PLUGIN_ROOT}` fails in every Windows shell (PowerShell, cmd),
+  even when the variable is set.
 - `$ARGUMENTS` is what the person asked for when they called this skill.
 - A command such as `/connect` is this plugin's skill of the same name; the person calls it as `$app-builder:connect`.
 - To spawn or run agent `kf-<name>`, read `${CLAUDE_PLUGIN_ROOT}/agents/kf-<name>.md` and carry it out: in a
   sub-agent given those instructions if you can start one, otherwise yourself, in the order the steps give.
 - AskUserQuestion: ask the person in chat and wait for the answer.
 - `kf.mjs` needs the network, a writable `~/.kissflow` and a local port for its sign-in page. When the sandbox
-  stops a `kf.mjs` command, run it again with escalated permissions; when no browser opens, give the person the
-  address it printed.
+  stops a `kf.mjs` command (it says writing to the home folder is not allowed), run it again with escalated
+  permissions; if that is not possible, show the person the ways to allow it that the command printed.
+- When a `kf.mjs` command prints a `➜ …:` line followed by a link, show the person that link right away and ask
+  them to open it in their browser: a browser often cannot open from here, and the command waits for that page.
 
 
 `/build-app` is the **end-to-end** command: it authors a real Kissflow app from your requirement,
@@ -23,8 +26,8 @@ generates it in your dev environment, then builds its UI. It unifies the two hal
 the **authoring** pipeline (data models, roles, workflows) and the **custom-UI** pipeline (a React
 app deployed as the app's `Application` component). The user picks the UI mode.
 
-Pre-req: the folder is connected to a Kissflow account (`.kf-env` exists → `source .kf-env`, which
-exports `KISSFLOW_DOMAIN` and `KISSFLOW_ACCOUNT_ID`; the build acts as the signed-in person).
+Pre-req: the folder is connected to a Kissflow account (`.kf-env` exists; every `kf.mjs` command reads it
+itself, so nothing needs sourcing; the build acts as the signed-in person).
 If it's missing, tell the user to run `/connect` and stop.
 
 ## Step 0 — Set up the workspace + pick the UI mode (FIRST, before any build work)
@@ -112,8 +115,7 @@ without it the slice is missing and the app ships with an unreviewed fallback, a
 fails the build:
 ```bash
 node "${CLAUDE_PLUGIN_ROOT}/bin/kf.mjs" language-catalog list
-node "${CLAUDE_PLUGIN_ROOT}/bin/kf.mjs" language-catalog design <selected-theme> --app-id <slug> --app-name "<name>" \
-  --rationale "<one line: why this complete theme fits THIS domain>" --record runs/current
+node "${CLAUDE_PLUGIN_ROOT}/bin/kf.mjs" language-catalog design <selected-theme> --app-id <slug> --app-name "<name>" --rationale "<one line: why this complete theme fits THIS domain>" --record runs/current
 ```
 `--rationale` is required — the command refuses to print a slice without it. The selected catalog
 theme owns the complete visual system; the design slice records the chosen id, shell, and rationale.

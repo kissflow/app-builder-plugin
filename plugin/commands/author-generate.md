@@ -14,7 +14,7 @@ and when acceptance runs (*"✅ kf-acceptance is test-driving each journey…"*)
 `node "${CLAUDE_PLUGIN_ROOT}/bin/kf.mjs" timeline report runs/current`; it's the demo headline.
 
 Pre-req: a current run with a **verified** `runs/current/app-spec.json`, and a connected folder
-(`source .kf-env`). Gate is *valid spec*, not "review was done" — so the express/demo path can reach
+(`.kf-env` exists; the engine reads it itself). Gate is *valid spec*, not "review was done" — so the express/demo path can reach
 here directly.
 
 ## Do

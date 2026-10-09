@@ -17,13 +17,12 @@ When connect completes it draws the Kissflow logo: show it to the user exactly a
 code block, then say they are connected — the production account and its Development sandbox.
 
 ## 0. Fast path (ZERO exploration)
-Decide with ONE cheap probe (it never errors):
+Decide with ONE probe (it fetches the engine on first use; "not connected" is an answer, not an error):
 ```bash
-ls .kf-env 2>/dev/null || true
+node "${CLAUDE_PLUGIN_ROOT}/bin/kf.mjs" connect --status
 ```
-- `.kf-env` present and `$ARGUMENTS` empty → `source .kf-env`, run
-  `node "${CLAUDE_PLUGIN_ROOT}/bin/kf.mjs" connect --status`, say *"Already connected to
-  **$KF_PROJECT_NAME** — `/build-app "<your requirement>"` when you're ready, or `/connect <address>`
+- It says `connected:` and `$ARGUMENTS` is empty → say *"Already connected to
+  **<the account it names>** — `/build-app "<your requirement>"` when you're ready, or `/connect <address>`
   to switch sandboxes."* and **stop**.
 - `$ARGUMENTS` has an address → go straight to step 2 with it. Connecting replaces `.kf-env` in
   place; an env pointing at a different account is exactly what it replaces, not a conflict.
@@ -52,7 +51,6 @@ account you gave, then one from its production account or Development sandbox (p
 My settings › API authentication › Access keys)."* Then:
 ```bash
 node "${CLAUDE_PLUGIN_ROOT}/bin/kf.mjs" connect <address>
-source .kf-env
 ```
 Connect prints a direct link to that account's API authentication settings, then opens one local
 page. **Step 1:** the user pastes that account's **access key ID** and **access key secret**.
@@ -108,7 +106,6 @@ production key and clicks **Done**. The same rules apply: never in this chat.
 Right after connecting, open the app picker:
 ```bash
 node "${CLAUDE_PLUGIN_ROOT}/bin/kf.mjs" connect --app
-source .kf-env
 ```
 A page lists the apps in this sandbox the user can **edit**, with search and whether **custom UI** is
 on for each. They pick one, or **Start a new app** (the next build creates it in production). In a
@@ -123,7 +120,7 @@ If connect warns that `runs/current` belongs to the previous sandbox or app, sta
 
 ## 4. Seed the agent memory
 ```bash
-[ -f MEMORY.md ] || cp "${CLAUDE_PLUGIN_ROOT}/MEMORY.md" MEMORY.md
+node "${CLAUDE_PLUGIN_ROOT}/bin/kf.mjs" memory seed "${CLAUDE_PLUGIN_ROOT}/MEMORY.md"
 ```
 `MEMORY.md` is the agents' auto-evolving memory — the user's to grow; an existing one is never replaced.
 

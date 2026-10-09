@@ -6,8 +6,8 @@ argument-hint: ""
 Bring an app that already exists in the connected Development sandbox into this folder, so the agents
 can explain it and change it safely. `/sync` only reads the app: nothing in Kissflow changes.
 
-1. **Connected?** One cheap probe: `ls .kf-env 2>/dev/null || true`. No `.kf-env` → tell the user to
-   run `/connect` first, and stop.
+1. **Connected?** One probe: `node "${CLAUDE_PLUGIN_ROOT}/bin/kf.mjs" connect --status`. If it says not connected, tell the user
+   to run `/connect` first, and stop.
 2. **Which app?** Run `node "${CLAUDE_PLUGIN_ROOT}/bin/kf.mjs" connect --status`. If it says no app is
    chosen, open the picker with `node "${CLAUDE_PLUGIN_ROOT}/bin/kf.mjs" connect --app` and ask the
    user to pick the app to bring in — not **Start a new app**, which is what `/build-app` is for. Show

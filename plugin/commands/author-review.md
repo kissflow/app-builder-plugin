@@ -25,12 +25,9 @@ Pre-req: `/author-plan` produced `runs/current/app-spec.json` + `decisions.md`.
    An app that skips this ships with an unreviewed default theme. Before either prototype agent
    spawns, choose the best-fit id from `node "${CLAUDE_PLUGIN_ROOT}/bin/kf.mjs" language-catalog list`:
    ```bash
-   node "${CLAUDE_PLUGIN_ROOT}/bin/kf.mjs" language-catalog design <theme-id> --app-id <slug> --app-name "<name>" \
-     --rationale "<one line: why this theme/archetype fits THIS domain>" \
-     --record runs/current \
-     [--archetype rail-left|rail-dark|top-bar|rail-right] [--density compact|comfortable|airy] \
-     --role-switcher <rail-footer|header-end|profile-chip>:<compact|profile>
+   node "${CLAUDE_PLUGIN_ROOT}/bin/kf.mjs" language-catalog design <theme-id> --app-id <slug> --app-name "<name>" --rationale "<one line: why this theme/archetype fits THIS domain>" --record runs/current [--archetype rail-left|rail-dark|top-bar|rail-right] [--density compact|comfortable|airy] --role-switcher <rail-footer|header-end|profile-chip>:<compact|profile>
    ```
+   (One line: a trailing `\` continues a command only in bash.)
    `--record` appends the layout + theme choice to `decisions.md` as the next `D<n>` — the nav
    position is a design decision the customer signs off on, not a CLI flag; the design check fails
    a run whose decision log has no design entry. `--rationale` is REQUIRED — the command refuses to
